@@ -22,9 +22,10 @@
   </div>
 </div>
 <div class="tab-bar">
-  <div class="tab" onclick="showTab('overview')">🇬🇪 概览</div>
-  <div class="tab active" onclick="showTab('itinerary')">📋 行程</div>
-  <div class="tab" onclick="showTab('map')">🗺️ 地图</div>
+  <div class="tab" data-tab="overview" onclick="showTab('overview')">🇬🇪 概览</div>
+  <div class="tab active" data-tab="itinerary" onclick="showTab('itinerary')">📋 行程</div>
+  <div class="tab" data-tab="map" onclick="showTab('map')">🗺️ 地图</div>
+  <div class="tab" data-tab="toolkit" onclick="showTab('toolkit')">🧳 锦囊</div>
 </div>
 <div class="container" id="overview-tab" style="display:none">
 
@@ -411,6 +412,168 @@
 <div class="footer-note">
   🇬🇪 Georgia Trip · 点击「导航」跳转 Apple Maps<br>
   坐标来源：OpenStreetMap / Booking / Trip.com · 路线数据：OSRM 实际道路导航
+</div>
+
+</div>
+
+<div class="container" id="toolkit-tab" style="display:none">
+
+<div class="calc-box">
+  <div class="calc-title"><span class="emoji">💱</span>离线汇率速算</div>
+  <div class="calc-rate-row">1 拉里 (GEL) = <input type="number" id="rateCNY" step="0.01" value="2.58" inputmode="decimal"> 人民币</div>
+  <div class="calc-rate-row">1 拉里 (GEL) = <input type="number" id="rateUSD" step="0.001" value="0.382" inputmode="decimal"> 美元</div>
+  <div class="calc-hint">默认是2026年8月中旬的参考汇率，出发前联网查一下最新汇率改上面两个数字，改完会存在手机本地，之后完全离线也能按你设的比例算。</div>
+  <div class="calc-input-row">
+    <input type="number" id="gelInput" placeholder="输入拉里金额" inputmode="decimal">
+    <span class="calc-eq">≈</span>
+    <div class="calc-output">
+      <div id="cnyOutput">0.00 <span>¥</span></div>
+      <div id="usdOutput">0.00 <span>$</span></div>
+    </div>
+  </div>
+  <table class="calc-quickref">
+    <tr><th>GEL</th><td>10</td><td>20</td><td>50</td><td>100</td><td>200</td></tr>
+    <tr><th>≈¥</th><td id="q10c"></td><td id="q20c"></td><td id="q50c"></td><td id="q100c"></td><td id="q200c"></td></tr>
+  </table>
+</div>
+
+<div class="ov-section" data-ov="food">
+  <div class="ov-section-head"><div class="ov-section-title"><span class="emoji">🍽</span>美食推荐</div><span class="expand-arrow">›</span></div>
+  <div class="ov-section-body"><div class="ov-section-body-inner">
+
+    <div class="note-box">大众点评在格鲁吉亚基本没有覆盖（国内平台以境内商户为主），这里的推荐和链接来自 TripAdvisor / 本地美食博客，实时评分和营业时间建议出发前再上 Google Maps 核对一遍。</div>
+
+    <span class="food-city-label">第比利斯 Tbilisi</span>
+    <div class="food-card">
+      <div class="food-card-head"><span class="name">Vejineli</span><span class="price">20-35 GEL/人</span></div>
+      <div class="desc">本地公认「最正统的传统菜馆」，灌汤包（Khinkali）皮薄馅足、捏褶到位，被不少美食博主排进全城第一梯队，哈恰普里和烤肉串也稳。</div>
+    </div>
+    <div class="food-card">
+      <div class="food-card-head"><span class="name">Salobie Bia</span><span class="price">25-35 GEL/人</span></div>
+      <div class="desc">老饕心头好，标语就是「简单的格鲁吉亚菜」，招牌豆焖锅配玉米饼、Shkmeruli烤鸡都是本味出圈，肖塔·鲁斯塔维利大街上。</div>
+    </div>
+    <div class="food-card">
+      <div class="food-card-head"><span class="name">Barbarestan</span><span class="price">30-40 GEL/人</span></div>
+      <div class="desc">菜单全部复原自19世纪格鲁吉亚女作家Barbare Jorjadze的手写食谱，宫廷风格古法菜，白桌布烛光，适合正式一点的晚餐。</div>
+    </div>
+    <div class="food-card">
+      <div class="food-card-head"><span class="name">Ezo</span><span class="price">20-30 GEL/人</span></div>
+      <div class="desc">老城区里的家常味小馆，环境温馨服务热情，推荐哈恰普里配烤猪肉，性价比不错。</div>
+      <div class="link-row"><a href="https://www.tripadvisor.com/Restaurants-g294195-Tbilisi.html" target="_blank">TripAdvisor 第比利斯榜单 ›</a></div>
+    </div>
+
+    <span class="food-city-label batumi">巴统 Batumi</span>
+    <div class="food-card">
+      <div class="food-card-head"><span class="name">Laguna</span><span class="price">15-25 GEL/人</span></div>
+      <div class="desc">阿扎尔船型芝士饼（Khachapuri Adjaruli）的头牌之一，老城中心，几乎是来巴统绕不开的一站。</div>
+    </div>
+    <div class="food-card">
+      <div class="food-card-head"><span class="name">Tavaduri</span><span class="price">20-35 GEL/人</span></div>
+      <div class="desc">本地人和游客都爱的老字号，分量足不做作，门口现烤肉串，招牌「孕妇灌汤包」是超大号Khinkali。</div>
+    </div>
+    <div class="food-card">
+      <div class="food-card-head"><span class="name">Heart of Batumi</span><span class="price">20-30 GEL/人</span></div>
+      <div class="desc">家常氛围，烤茄子、炖牛肉评价都很稳，离黑海大道近，吃完可以顺路散步到 Ali & Nino 雕塑。</div>
+      <div class="link-row"><a href="https://www.tripadvisor.com/Restaurants-g297576-Batumi_Adjara_Region.html" target="_blank">TripAdvisor 巴统榜单 ›</a></div>
+    </div>
+
+    <span class="food-city-label kutaisi">库塔伊西 Kutaisi</span>
+    <div class="food-card">
+      <div class="food-card-head"><span class="name">Sisters</span><span class="price">20-30 GEL/人</span></div>
+      <div class="desc">中央公园边上一栋粉色老建筑，本地人和游客都常去的网红店，环境是加分项。</div>
+    </div>
+    <div class="food-card">
+      <div class="food-card-head"><span class="name">Sesame Restaurant</span><span class="price">25-35 GEL/人</span></div>
+      <div class="desc">现代改良格鲁吉亚菜，常被评价「比大部分传统馆子更精致」，适合想换换口味的一餐。</div>
+      <div class="link-row"><a href="https://www.tripadvisor.com/Restaurants-g815359-Kutaisi_Imereti_Region.html" target="_blank">TripAdvisor 库塔伊西榜单 ›</a></div>
+    </div>
+
+    <span class="food-city-label kazbegi">卡兹别克 Kazbegi / Stepantsminda</span>
+    <div class="food-card">
+      <div class="food-card-head"><span class="name">Khevi Restaurant</span><span class="price">20-30 GEL/人</span></div>
+      <div class="desc">能望到卡兹别克雪山的观景餐厅，烤鱼和烤肉串都推荐，徒步完来一顿很治愈。</div>
+    </div>
+    <div class="food-card">
+      <div class="food-card-head"><span class="name">Rooms Hotel Kazbegi 餐厅</span><span class="price">40+ GEL/人</span></div>
+      <div class="desc">山区少见的精致餐厅水准，融合菜系，不少游客评价是「在格鲁吉亚吃过最好的一餐」，建议提前订位。</div>
+    </div>
+    <div class="food-card">
+      <div class="food-card-head"><span class="name">Qondari</span><span class="price">20-30 GEL/人</span></div>
+      <div class="desc">离Juta徒步大本营近，主打山区特色菜，推荐当地芝士玉米饼 Chvishtari。</div>
+      <div class="link-row"><a href="https://www.tripadvisor.com/Restaurants-g13002079-Stepantsminda_Mtskheta_Mtianeti_Region.html" target="_blank">TripAdvisor Stepantsminda榜单 ›</a></div>
+    </div>
+
+    <div class="note-box">街头小吃（炸鸡肉串、烤玉米、Lachkhula甜饼）挑排队多、摊位整洁的买，肉类和乳制品尤其要看新鲜度；吃坏肚子及时就医并保留病历，方便后续跟旅行保险理赔。</div>
+
+  </div></div>
+</div>
+
+<div class="ov-section" data-ov="shopping">
+  <div class="ov-section-head"><div class="ov-section-title"><span class="emoji">🛍</span>购物指南</div><span class="expand-arrow">›</span></div>
+  <div class="ov-section-body"><div class="ov-section-body-inner">
+    <h4>伴手礼清单</h4>
+    <ul>
+      <li><b>葡萄酒</b>——卡赫季（Kakheti）产区最正宗，认准 Saperavi（红）和 Rkatsiteli（白），陶罐（Qvevri）工艺的更有特色，机场免税店选择少，建议在酒庄或市区专卖店买</li>
+      <li><b>Churchkhela 蜡烛糖</b>——核桃串裹浓缩葡萄汁风干，常温放很久不坏，适合当办公室伴手礼</li>
+      <li><b>核桃酱 / 蜂蜜</b>——山区野花蜂蜜品质好，核桃酱可以抹面包或直接下厨用</li>
+      <li><b>珐琅首饰、银饰</b>——民族图案融合现代设计，第比利斯老城工艺品店很常见</li>
+      <li><b>羊毛围巾 / 传统服饰元素小物</b>——保暖又有辨识度，价格比欧洲同类产品便宜不少</li>
+    </ul>
+    <h4>第比利斯淘店指南</h4>
+    <ul>
+      <li><b>Dry Bridge Market 干桥跳蚤市场</b>——苏联老物件、古董、手工艺品的大本营，周六周日最热闹，淘东西可以砍价（10%-20%空间很正常），备好现金零钱</li>
+      <li><b>Sololaki 区独立小店</b>——老城边缘的小众设计师店铺聚集地，珐琅、银饰、手工皮具都有，店主大多热情健谈，可以顺便问问制作工艺</li>
+      <li><b>第比利斯中央市场</b>——更日常向，新鲜食材、香料、奶酪、蜂蜜都能买，顺便体验当地菜市场氛围，价格比游客区实惠</li>
+      <li><b>Galleria Tbilisi / East Point Mall</b>——想买国际品牌或临时补日用品时去这两个大商场，营业到22点左右</li>
+    </ul>
+    <h4>退税小贴士</h4>
+    <p>同一家店单笔消费满200拉里可以退税，购物时让店员开具 Tax Free 退税单并核对姓名护照号等信息；离境前在机场海关柜台盖章，再去 Global Blue 之类的退税窗口办理（现金或退回信用卡都行，现金会扣10%-15%手续费）。退税只能在「最终离开欧亚地区」那一站办理——如果格鲁吉亚之后还要去亚美尼亚、阿塞拜疆，记得在离开格鲁吉亚这一步就把税退掉。</p>
+  </div></div>
+</div>
+
+<div class="ov-section" data-ov="safety">
+  <div class="ov-section-head"><div class="ov-section-title"><span class="emoji">⚠️</span>安全事项</div><span class="expand-arrow">›</span></div>
+  <div class="ov-section-body"><div class="ov-section-body-inner">
+    <div class="note-box">以下内容整理自旅行社提供的行前须知，出发前建议再核实一遍最新的领事提醒和边境政策。</div>
+
+    <div class="safety-sub">人身财产</div>
+    <ul>
+      <li>老城区、干桥市场、巴统海滨大道这类游客密集区小偷相对多，手机钱包别放外侧口袋，市场里东西别离开视线</li>
+      <li>夜间尽量别独自走偏僻小巷，外出优先打车；酒吧里的酒水离开视线后不要再喝，防止被下药</li>
+      <li>护照、签证、机票拍照存进手机和邮箱，原件和复印件分开放；现金分开放不要都塞一个地方</li>
+    </ul>
+
+    <div class="safety-sub">证件与货币</div>
+    <ul>
+      <li>护照有效期要盖过离境日至少6个月，留至少2页空白签证页，最好打印一份行程单和住宿预订单</li>
+      <li>随身携带现金超过1万美元等值需要入境申报，离境金额不能超过入境申报数</li>
+      <li>ATM取款尽量选银行网点或商场里的机子，输密码时用手遮一下，取完及时收好</li>
+    </ul>
+
+    <div class="safety-sub">自然环境与健康</div>
+    <ul>
+      <li>山区（卡兹别克、Juta徒步）早晚温差大，夏天也建议带薄外套；冬季道路容易结冰封路，出发前查一下路况</li>
+      <li>第比利斯这类大城市自来水基本能直接喝，肠胃敏感建议还是喝瓶装水</li>
+      <li>常用药、慢性病处方药随身带够；建议买一份覆盖医疗和紧急救援的旅行保险（保额5万美元以上）</li>
+    </ul>
+
+    <div class="safety-sub">紧急联络</div>
+    <ul>
+      <li>通用报警/急救/消防：<b>112</b>（有英语服务）；细分：警察102、急救103、消防101</li>
+      <li>中国驻格鲁吉亚大使馆：+995-322-471-141，地址 52 Stepane Shartava St., Tbilisi</li>
+      <li>护照丢失、被偷、滞留等问题第一时间联系大使馆，同时报警留一份报案记录，方便后续保险理赔</li>
+    </ul>
+
+    <div class="safety-sub">当地习俗小禁忌</div>
+    <ul>
+      <li>进东正教堂：女士需包头巾（门口一般能免费借），别穿短裤短裙背心；拍照留意是否有禁拍标识，别用闪光灯</li>
+      <li>送花要送单数，双数通常用于葬礼；不主动问收入、年龄、婚姻状况这类隐私问题</li>
+      <li>敬酒文化很重，不喝酒直接礼貌说明就行，主人不会强迫，但别表现出反感</li>
+    </ul>
+
+    <div class="safety-sub">电压与通讯</div>
+    <p>220V，插头是德标两孔圆柱（跟中国的扁头不一样），记得带转换头。当地电话卡在机场或市区营业厅都能买（Magti / Beeline / Silknet），10拉里左右就有1GB流量的套餐；连公共WiFi时避免登网银或刷卡这类操作。</p>
+  </div></div>
 </div>
 
 </div>

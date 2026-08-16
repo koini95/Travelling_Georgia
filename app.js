@@ -208,21 +208,16 @@ var GUIDE = {
 // Tab switching
 function showTab(tab) {
   var tabs = document.querySelectorAll('.tab-bar .tab');
-  tabs.forEach(function(t) { t.classList.remove('active'); });
-  document.getElementById('overview-tab').style.display = 'none';
-  document.getElementById('itinerary-tab').style.display = 'none';
-  document.getElementById('map-tab').classList.remove('show');
-  document.body.style.overflow = '';
-  if (tab === 'overview') {
-    tabs[0].classList.add('active');
-    document.getElementById('overview-tab').style.display = 'block';
-  } else if (tab === 'itinerary') {
-    tabs[1].classList.add('active');
-    document.getElementById('itinerary-tab').style.display = 'block';
-  } else {
-    tabs[2].classList.add('active');
-    document.getElementById('map-tab').classList.add('show');
-    document.body.style.overflow = 'hidden';
+  tabs.forEach(function(t) {
+    t.classList.toggle('active', t.dataset.tab === tab);
+  });
+  ['overview', 'itinerary', 'toolkit'].forEach(function(name) {
+    var el = document.getElementById(name + '-tab');
+    if (el) el.style.display = (tab === name) ? 'block' : 'none';
+  });
+  document.getElementById('map-tab').classList.toggle('show', tab === 'map');
+  document.body.style.overflow = (tab === 'map') ? 'hidden' : '';
+  if (tab === 'map') {
     if (!window._mapInited) {
       initMap();
       window._mapInited = true;
@@ -519,7 +514,46 @@ document.addEventListener('DOMContentLoaded', function() {
   renderCityIntros();
   renderAttractions();
   renderOverviewSections();
+  initCurrencyCalc();
 });
+
+// ===== Offline currency calculator (GEL -> CNY / USD) =====
+// Rates default to the Aug 2026 reference rate; fully editable and cached in
+// localStorage so it keeps working with your own numbers even offline.
+function initCurrencyCalc() {
+  var rateCNYInput = document.getElementById('rateCNY');
+  var rateUSDInput = document.getElementById('rateUSD');
+  var gelInput = document.getElementById('gelInput');
+  if (!rateCNYInput || !rateUSDInput || !gelInput) return;
+
+  var savedCNY = localStorage.getItem('gel_rate_cny');
+  var savedUSD = localStorage.getItem('gel_rate_usd');
+  if (savedCNY) rateCNYInput.value = savedCNY;
+  if (savedUSD) rateUSDInput.value = savedUSD;
+
+  var quickAmounts = [10, 20, 50, 100, 200];
+  var quickCells = quickAmounts.map(function(a) { return document.getElementById('q' + a + 'c'); });
+
+  function update() {
+    var rCNY = parseFloat(rateCNYInput.value) || 0;
+    var rUSD = parseFloat(rateUSDInput.value) || 0;
+    localStorage.setItem('gel_rate_cny', rateCNYInput.value);
+    localStorage.setItem('gel_rate_usd', rateUSDInput.value);
+
+    var gel = parseFloat(gelInput.value) || 0;
+    document.getElementById('cnyOutput').innerHTML = (gel * rCNY).toFixed(2) + ' <span>¥</span>';
+    document.getElementById('usdOutput').innerHTML = (gel * rUSD).toFixed(2) + ' <span>$</span>';
+
+    quickAmounts.forEach(function(a, i) {
+      if (quickCells[i]) quickCells[i].textContent = (a * rCNY).toFixed(1);
+    });
+  }
+
+  [rateCNYInput, rateUSDInput, gelInput].forEach(function(el) {
+    el.addEventListener('input', update);
+  });
+  update();
+}
 
 // Init when the map tab is first opened (see showTab) rather than on load,
 // so Leaflet always measures a visible, correctly-sized container.

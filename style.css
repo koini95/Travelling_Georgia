@@ -315,11 +315,12 @@ body {
   flex: 1;
   text-align: center;
   padding: 12px 0;
-  font-size: 15px;
+  font-size: 13.5px;
   font-weight: 600;
   color: var(--text3);
   border-bottom: 2px solid transparent;
   transition: all 0.2s;
+  white-space: nowrap;
 }
 .tab-bar .tab.active {
   color: var(--blue);
@@ -502,3 +503,96 @@ body {
 .ov-city:last-child { border-bottom: none; }
 .ov-city .name { font-size: 14px; font-weight: 700; color: var(--blue); margin-bottom: 3px; }
 
+
+/* ===== Toolkit tab: currency calc / food / shopping / safety ===== */
+.calc-box {
+  background: var(--card);
+  border-radius: var(--radius);
+  padding: 16px;
+  margin-bottom: 14px;
+  box-shadow: 0 2px 8px rgba(60,50,30,0.07);
+  border-left: 3px solid var(--teal);
+}
+.calc-title { font-size: 15px; font-weight: 700; color: var(--text); margin-bottom: 10px; }
+.calc-title .emoji { margin-right: 6px; }
+.calc-rate-row { display: flex; align-items: center; gap: 6px; font-size: 13px; color: var(--text2); margin-bottom: 8px; }
+.calc-rate-row input {
+  width: 64px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 5px 6px;
+  font-size: 13px;
+  color: var(--text);
+  background: var(--bg);
+  text-align: center;
+}
+.calc-hint { font-size: 11.5px; color: var(--text3); line-height: 1.6; margin-bottom: 12px; }
+.calc-input-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--bg);
+  border-radius: 10px;
+  padding: 10px 12px;
+  margin-bottom: 10px;
+}
+.calc-input-row input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text);
+  min-width: 0;
+}
+.calc-input-row input::placeholder { color: var(--text3); font-weight: 400; font-size: 14px; }
+.calc-eq { color: var(--text3); font-size: 14px; }
+.calc-output { text-align: right; line-height: 1.4; }
+.calc-output div { font-size: 16px; font-weight: 700; color: var(--teal); }
+.calc-output div span { font-size: 11px; font-weight: 500; color: var(--text3); margin-left: 2px; }
+.calc-quickref { width: 100%; border-collapse: collapse; font-size: 12px; }
+.calc-quickref th, .calc-quickref td { text-align: center; padding: 6px 2px; color: var(--text2); }
+.calc-quickref th { color: var(--text3); font-weight: 600; font-size: 10px; text-transform: uppercase; }
+.calc-quickref tr:first-child td { font-weight: 700; color: var(--text); border-bottom: 1px solid var(--border); }
+
+.food-card, .shop-card {
+  padding: 12px 0;
+  border-bottom: 1px solid #EEE8D9;
+}
+.food-card:last-child, .shop-card:last-child { border-bottom: none; }
+.food-card-head { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; }
+.food-card .name, .shop-card .name { font-size: 14px; font-weight: 700; color: var(--blue); }
+.food-card .price { font-size: 11px; color: var(--text3); white-space: nowrap; }
+.food-card .desc, .shop-card .desc { font-size: 13px; color: var(--text2); line-height: 1.7; margin-top: 4px; }
+.food-card .link-row { margin-top: 6px; }
+.food-card .link-row a, .shop-card .link-row a {
+  font-size: 12px;
+  color: var(--teal);
+  text-decoration: none;
+  margin-right: 14px;
+}
+.food-city-label {
+  font-size: 12px;
+  font-weight: 700;
+  color: #fff;
+  background: var(--blue);
+  border-radius: 6px;
+  padding: 3px 9px;
+  display: inline-block;
+  margin: 4px 0 6px;
+}
+.food-city-label.batumi { background: var(--green); }
+.food-city-label.kutaisi { background: var(--orange); }
+.food-city-label.kazbegi { background: var(--purple); }
+.note-box {
+  background: #FBF3EA;
+  border-left: 3px solid var(--orange);
+  border-radius: 10px;
+  padding: 10px 12px;
+  font-size: 12.5px;
+  color: var(--text2);
+  line-height: 1.7;
+  margin: 10px 0;
+}
+.safety-sub { font-size: 12px; font-weight: 700; color: var(--red); margin: 14px 0 6px; }
+.safety-sub:first-child { margin-top: 0; }
