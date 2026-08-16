@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<title>格鲁吉亚行程</title>
+<link rel="stylesheet" href="leaflet.css">
+<link rel="stylesheet" href="style.css">
+<link rel="manifest" href="manifest.json">
+
+</head>
+<body>
+<div class="header">
+  <h1>🇬🇪 格鲁吉亚行程</h1>
+  <div class="dates">2025.10.2 — 10.9 · 8天7晚</div>
+  <div class="stats">
+    <div class="stat"><b>4</b>大区域</div>
+    <div class="stat"><b>5</b>处住宿</div>
+    <div class="stat"><b>7</b>段行车路线</div>
+  </div>
+</div>
+<div class="tab-bar">
+  <div class="tab" onclick="showTab('overview')">🇬🇪 概览</div>
+  <div class="tab active" onclick="showTab('itinerary')">📋 行程</div>
+  <div class="tab" onclick="showTab('map')">🗺️ 地图</div>
+</div>
+<div class="container" id="overview-tab" style="display:none">
+
+<div class="ov-lead">🇬🇪 高加索山脚下的小国，几千年的酿酒史、雪山与黑海、古老的教堂和人均100块吃到撑的美食——格鲁吉亚是那种去了就想赖着不走的地方。</div>
+
+<div class="ov-facts">
+  <div class="ov-fact"><div class="k">首都</div><div class="v">第比利斯 Tbilisi</div></div>
+  <div class="ov-fact"><div class="k">语言</div><div class="v">格鲁吉亚语(英语够用)</div></div>
+  <div class="ov-fact"><div class="k">货币</div><div class="v">拉里 GEL · 1≈2.7元</div></div>
+  <div class="ov-fact"><div class="k">最佳季节</div><div class="v">5-6月 / 9-10月</div></div>
+</div>
+
+<div class="ov-section" data-ov="geo">
+  <div class="ov-section-head"><div class="ov-section-title"><span class="emoji">🗺</span>地理</div><span class="expand-arrow">›</span></div>
+  <div class="ov-section-body"><div class="ov-section-body-inner">
+    <p>格鲁吉亚夹在高加索山脉和黑海之间，北接俄罗斯、南邻土耳其和亚美尼亚、东靠阿塞拜疆。国土面积6.97万平方公里，跟宁夏差不多大。地形极其立体——大高加索山脉北边挡住西伯利亚寒流，黑海从西边送暖湿气流，造就了一个气候和地貌都极丰富的小国：西部是亚热带黑海沿岸，中部是河谷与丘陵，东部是半干旱平原，北部是终年积雪的5000米级山峰。全国最高点是什哈拉峰，5193米，比勃朗峰还高近400米。</p>
+  </div></div>
+</div>
+
+<div class="ov-section" data-ov="history">
+  <div class="ov-section-head"><div class="ov-section-title"><span class="emoji">📜</span>历史</div><span class="expand-arrow">›</span></div>
+  <div class="ov-section-body"><div class="ov-section-body-inner">
+    <p>格鲁吉亚的历史比你想象的硬核。</p>
+    <h4>远古到古典时代</h4>
+    <p>考古证据显示，这里的人类活动可追溯到180万年前(德马尼西遗址发现的直立人化石是非洲以外最古老的之一)。公元前6世纪科尔基斯王国兴起，就是希腊神话里伊阿宋找金羊毛的地方——金羊毛的传说很可能源自斯瓦涅季山区用羊皮淘金的古老方法。</p>
+    <h4>罗马-拜占庭时期</h4>
+    <p>公元337年，格鲁吉亚成为世界上第二个以基督教为国教的国家(第一个是亚美尼亚，早了几十年)。此后近两千年，东正教一直是格鲁吉亚民族认同的核心粘合剂。</p>
+    <h4>黄金时代</h4>
+    <p>11到13世纪，大卫四世("建国者")和塔玛尔女王执政期间是格鲁吉亚的巅峰。疆域从黑海延伸到里海，文化、艺术、建筑空前繁荣。格鲁吉亚人至今把塔玛尔女王当民族图腾，肖塔·鲁斯塔维里的史诗《虎皮武士》就写于这个时期。</p>
+    <h4>被侵略的六个世纪</h4>
+    <p>从13世纪蒙古入侵开始，格鲁吉亚就没消停过：帖木儿、奥斯曼、波斯轮番来。1801年被沙俄吞并，之后是苏联。这六百年里格鲁吉亚做了同一件事：活下来，且不丢语言、宗教和文化。</p>
+    <h4>独立与现在</h4>
+    <p>1991年苏联解体后独立。2008年俄格战争后俄罗斯实际控制阿布哈兹和南奥塞梯(约占国土20%)。目前格鲁吉亚公开追求加入欧盟和北约，民意支持率很高，但这条路不好走。</p>
+  </div></div>
+</div>
+
+<div class="ov-section" data-ov="people">
+  <div class="ov-section-head"><div class="ov-section-title"><span class="emoji">👥</span>人口与民族</div><span class="expand-arrow">›</span></div>
+  <div class="ov-section-body"><div class="ov-section-body-inner">
+    <p>全国约370万人，格鲁吉亚族占83%，其他有阿塞拜疆族、亚美尼亚族、俄罗斯族等。格鲁吉亚人自称"Kartveli"，这个民族至少在Caucasus这片土地上生活了三千年以上。他们热情好客到一种夸张的程度——客人被认为是"上帝的礼物"，主人会倾其所有招待你。有个格鲁吉亚谚语："客人来了，太阳也会为你升起。"</p>
+  </div></div>
+</div>
+
+<div class="ov-section" data-ov="language">
+  <div class="ov-section-head"><div class="ov-section-title"><span class="emoji">🔤</span>语言与文字</div><span class="expand-arrow">›</span></div>
+  <div class="ov-section-body"><div class="ov-section-body-inner">
+    <p>格鲁吉亚语属于南高加索语系，和世界上任何主流语言都没有亲缘关系。语法极其复杂，动词同时变位人称、时态、体的组合多到离谱。但最惹眼的还是文字——格鲁吉亚字母(Mkhedruli)形态独特，全是流畅的圆弧，跟世界上任何其他文字都不像，被列入世界非物质文化遗产。你走在第比利斯街上，满眼都是这些优美的曲线符号，本身就是一道风景。</p>
+    <p>老一辈和偏农村地区俄语通行，30岁以下年轻人英语越来越好，旅游区基本够用。</p>
+  </div></div>
+</div>
+
+<div class="ov-section" data-ov="religion">
+  <div class="ov-section-head"><div class="ov-section-title"><span class="emoji">⛪</span>宗教</div><span class="expand-arrow">›</span></div>
+  <div class="ov-section-body"><div class="ov-section-body-inner">
+    <p>东正教是绝对主流(约83%)，格鲁吉亚东正教会是世界上最古老的自治教会之一，在民族认同中地位极高，甚至比政府还受信任。第二大群体是穆斯林(约10%，主要在阿扎尔和阿塞拜疆族聚居区)。格鲁吉亚在宗教宽容方面传统很好——第比利斯老城里东正教堂、犹太会堂、清真寺和亚美尼亚教堂四家做了几百年邻居。</p>
+  </div></div>
+</div>
+
+<div class="ov-section" data-ov="economy">
+  <div class="ov-section-head"><div class="ov-section-title"><span class="emoji">💰</span>经济</div><span class="expand-arrow">›</span></div>
+  <div class="ov-section-body"><div class="ov-section-body-inner">
+    <p>格鲁吉亚不是什么富国，2024年人均GDP大约8000多美元。但近年来经济自由度改革非常激进——世界银行营商环境排名曾经一度冲进全球前十。主要支柱：旅游业、农业(葡萄酒和坚果是出口拳头产品)、过境物流(中欧班列南线经过这里，巴统港和波季港是里海石油外运通道)。此外IT和服务外包增长很快，第比利斯有不少对欧美的外包公司。</p>
+    <p>对游客来说最直接的影响：东西很便宜，随便吃随便喝不会心疼。</p>
+  </div></div>
+</div>
+
+<div class="ov-section" data-ov="culture">
+  <div class="ov-section-head"><div class="ov-section-title"><span class="emoji">🎭</span>文化碎片</div><span class="expand-arrow">›</span></div>
+  <div class="ov-section-body"><div class="ov-section-body-inner">
+    <ul>
+      <li><b>多声部民歌</b>——世界非遗，那种不和谐的平行和声非常古老，听着像从石头里传出来的声音</li>
+      <li><b>跳舞</b>——格鲁吉亚民族舞极其刚烈，男的像鹰一样腾空旋转，女的像在水面滑行</li>
+      <li><b>Supra(传统宴席)</b>——一顿正经宴会动辄几个小时，必须有一位Tamada(宴席主持人)不停祝酒，祝酒词像诗一样讲究，十几轮起跳</li>
+      <li><b>长寿</b>——高加索山区本来就是世界公认的长寿地区之一，格鲁吉亚饮食结构(大量蔬菜、坚果、发酵乳制品、适量红酒)被认为是地中海饮食的东方版本</li>
+    </ul>
+  </div></div>
+</div>
+
+<div class="ov-section" data-ov="cities">
+  <div class="ov-section-head"><div class="ov-section-title"><span class="emoji">📍</span>城市与景点</div><span class="expand-arrow">›</span></div>
+  <div class="ov-section-body"><div class="ov-section-body-inner">
+    <div class="ov-city-grid">
+      <div class="ov-city"><div class="name">第比利斯</div>老城像打翻的调色盘，木阳台歪歪扭扭挂在崖壁上。必做三件事：坐缆车上纳里卡拉要塞看全城日落、泡硫磺浴(老城那个圆顶砖房就是)、在干桥市场淘苏联老物件。</div>
+      <div class="ov-city"><div class="name">卡兹别克</div>从第比利斯沿军用公路北上3小时，终点是海拔2170米的圣三一教堂。雪山就在你背后，教堂孤零零立在悬崖上，风大得站不稳。沿途会经过Ananuri城堡(Lonely Planet高加索封面取景地)和俄格友谊纪念碑的环形观景台。</div>
+      <div class="ov-city"><div class="name">西格纳吉</div>"爱情小镇"，24小时营业的婚姻登记处是最大卖点。其实更值得的是这里是葡萄酒产区的心脏，随便进一家酒庄就能喝到陶罐(Qvevri)酿的自然酒。</div>
+      <div class="ov-city"><div class="name">梅斯蒂亚 & 乌树故里</div>斯瓦涅季山区，欧洲海拔最高的持续有人居住的村落。夏天徒步、冬天滑雪。乌树故里的碉楼群是世界文化遗产，雪山、草甸、石塔的组合比瑞士野得多。</div>
+      <div class="ov-city"><div class="name">巴统</div>黑海边的度假城市，氛围和其他地方完全不同。Ali & Nino移动雕塑是打卡点——两个金属人像缓缓靠近、融合、分离，每天循环一遍。</div>
+      <div class="ov-city"><div class="name">库塔伊西</div>曾经的古都，两处世界遗产：巴格拉特大教堂(俯瞰全城的绝佳位置)和格拉特修道院(12世纪的湿壁画)。</div>
+    </div>
+  </div></div>
+</div>
+
+<div class="ov-section" data-ov="food">
+  <div class="ov-section-head"><div class="ov-section-title"><span class="emoji">🍽</span>吃</div><span class="expand-arrow">›</span></div>
+  <div class="ov-section-body"><div class="ov-section-body-inner">
+    <p>格鲁吉亚菜是高加索菜系的扛把子：</p>
+    <ul>
+      <li><b>Khinkali(灌汤包)</b>——比上海小笼包大三倍，顶上那个面疙瘩是拿手捏的地方不要吃。馅料有牛羊混合肉、蘑菇、土豆奶酪</li>
+      <li><b>Khachapuri</b>——奶酪饼。最经典是阿扎尔船型的，中间窝个生蛋和黄油，上桌搅开蘸着吃</li>
+      <li><b>核桃茄子卷、核桃青椒塞肉、Pkhali(核桃蔬菜泥)</b>——格鲁吉亚人爱核桃爱到骨子里</li>
+      <li><b>Churchkhela</b>——蜡烛糖，核桃串裹浓缩葡萄汁风干，看着像香肠，吃起来是天然能量棒</li>
+    </ul>
+  </div></div>
+</div>
+
+<div class="ov-section" data-ov="drink">
+  <div class="ov-section-head"><div class="ov-section-title"><span class="emoji">🍷</span>喝</div><span class="expand-arrow">›</span></div>
+  <div class="ov-section-body"><div class="ov-section-body-inner">
+    <p>格鲁吉亚自称是葡萄酒发源地，8000年酿酒史，陶罐(Qvevri)酿酒法入选世界非遗。必喝琥珀色的陶罐白葡萄酒，单宁重、氧化风味明显，和常见的清爽型白葡萄酒完全两个世界。</p>
+    <p>不喝酒就去喝矿泉水——Borjomi是格鲁吉亚国民品牌，带气泡的天然矿泉水。</p>
+  </div></div>
+</div>
+
+<div class="ov-section" data-ov="transport">
+  <div class="ov-section-head"><div class="ov-section-title"><span class="emoji">🚗</span>交通</div><span class="expand-arrow">›</span></div>
+  <div class="ov-section-body"><div class="ov-section-body-inner">
+    <ul>
+      <li>第比利斯市内：Bolt叫车很便宜，地铁两条线够用</li>
+      <li>城际：小巴(Marshrutka)最便宜但体验一般；4-6人包车最划算，一天约150-200拉里</li>
+      <li>从第比利斯到巴统可坐双层火车，5小时沿海岸线开，风景不错</li>
+    </ul>
+  </div></div>
+</div>
+
+<div class="ov-section" data-ov="notes">
+  <div class="ov-section-head"><div class="ov-section-title"><span class="emoji">⚠️</span>注意事项</div><span class="expand-arrow">›</span></div>
+  <div class="ov-section-body"><div class="ov-section-body-inner">
+    <ul>
+      <li>格鲁吉亚是东正教国家，进教堂女性一般要包头巾、穿裙子(门口通常有公用的)</li>
+      <li>治安很好，是外高加索三国中最安全的</li>
+      <li>物价极低，一顿丰盛的当地正餐人均30-50拉里就够</li>
+      <li>插座是欧标双圆孔，带转换头</li>
+      <li>大部分地方刷卡没问题，但山区和路边摊要备现金</li>
+    </ul>
+  </div></div>
+</div>
+
+</div>
+
+<div class="container" id="itinerary-tab">
+
+<!-- Hotel Summary -->
+<div class="hotel-summary">
+  <div class="hotel-summary-title">🏨 酒店导航</div>
+  <a class="hotel-summary-item" href="maps://?daddr=41.6996,44.7954&q=Palm+Tbilisi+Boutique+Hotel">
+    <span class="dot" style="background:#C2643E"></span>
+    <div class="info"><div class="name">Palm Tbilisi Boutique Hotel</div><div class="nights">10.2-3 / 10.8 · 第比利斯</div></div>
+    <span class="arrow">›</span>
+  </a>
+  <a class="hotel-summary-item" href="maps://?daddr=41.6513,41.6372&q=Hotel+Indigo+Batumi">
+    <span class="dot" style="background:#7A9471"></span>
+    <div class="info"><div class="name">Hotel Indigo Batumi</div><div class="nights">10.4 · 巴统</div></div>
+    <span class="arrow">›</span>
+  </a>
+  <a class="hotel-summary-item" href="maps://?daddr=42.2614,42.7121&q=Hotel+Panoramic+Kutaisi">
+    <span class="dot" style="background:#C99A4E"></span>
+    <div class="info"><div class="name">Hotel Panoramic</div><div class="nights">10.5 · 库塔伊西</div></div>
+    <span class="arrow">›</span>
+  </a>
+  <a class="hotel-summary-item" href="maps://?daddr=42.6598,44.6414&q=Porta+Caucasia+Kazbegi">
+    <span class="dot" style="background:#9A7CA8"></span>
+    <div class="info"><div class="name">Porta Caucasia Kazbegi</div><div class="nights">10.6 · 卡兹别克</div></div>
+    <span class="arrow">›</span>
+  </a>
+  <a class="hotel-summary-item" href="maps://?daddr=42.6580,44.6408&q=Melodia+Kazbegi">
+    <span class="dot" style="background:#9A7CA8"></span>
+    <div class="info"><div class="name">Melodia Kazbegi</div><div class="nights">10.7 · 卡兹别克</div></div>
+    <span class="arrow">›</span>
+  </a>
+</div>
+
+<!-- Day 1: 10.2 -->
+<div class="day-card">
+  <div class="day-header">
+    <div class="date-badge">10.2</div>
+    <div class="route">第比利斯接机</div>
+  </div>
+  <div class="day-body">
+    <div class="city-intro" data-city="city_tbilisi"></div>
+    <div class="attractions">
+      <span class="label">景点</span>
+      <span class="attraction-item">— 抵达第比利斯，入住酒店</span>
+    </div>
+    <div class="hotel-box tbilisi">
+      <div class="hotel-name-cn">棕榈第比利斯精品酒店</div>
+      <div class="hotel-name-en">Palm Tbilisi Boutique Hotel · ⭐4.5 · 评分 9.0</div>
+      <div class="hotel-meta">
+        <span class="meta-item">📍 3 Alexander Griboedov St, Tbilisi 0108</span>
+        <span class="meta-item">🕐 入住 14:00 / 退房 12:00</span>
+      </div>
+      <div class="hotel-actions">
+        <a class="nav-btn" href="maps://?daddr=41.6996,44.7954&q=Palm+Tbilisi+Boutique+Hotel">📍 导航</a>
+      </div>
+      <a class="booking-link" href="https://www.booking.com/hotel/ge/palm-tbilisi-boutique-bilisi.en-gb.html" target="_blank">📋 Booking ›</a>
+    </div>
+  </div>
+</div>
+
+<!-- Day 2: 10.3 -->
+<div class="day-card">
+  <div class="day-header">
+    <div class="date-badge">10.3</div>
+    <div class="route">第比利斯 — 西格纳吉 — 第比利斯</div>
+  </div>
+  <div class="day-body">
+    <div class="city-intro" data-city="city_kakheti"></div>
+    <div class="attractions">
+      <span class="label">景点</span>
+      <span class="attraction-item" data-key="sighnaghi_wall">🏛 古城墙</span>
+      <span class="attraction-item" data-key="kindzmarauli_winery">🍷 Corporation Kindzmarauli 酒庄（入内约1h + 品4款酒 + 丘奇赫拉小吃）</span>
+    </div>
+    <div class="hotel-box tbilisi">
+      <div class="hotel-name-cn">棕榈第比利斯精品酒店</div>
+      <div class="hotel-name-en">Palm Tbilisi Boutique Hotel</div>
+      <div class="hotel-actions">
+        <a class="nav-btn" href="maps://?daddr=41.6996,44.7954&q=Palm+Tbilisi+Boutique+Hotel">📍 导航</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Day 3: 10.4 -->
+<div class="day-card batumi">
+  <div class="day-header">
+    <div class="date-badge batumi">10.4</div>
+    <div class="route">第比利斯 — 姆兹赫塔 — 巴统</div>
+  </div>
+  <div class="day-body">
+    <div class="city-intro" data-city="city_batumi"></div>
+    <div class="attractions">
+      <span class="label">景点</span>
+      <span class="attraction-item" data-key="jvari_monastery">⛪ 圣十字修道院</span>
+      <span class="attraction-item" data-key="svetitskhoveli">⛪ 斯维特特斯克维里教堂</span>
+    </div>
+    <div class="hotel-box batumi">
+      <div class="hotel-name-cn">洲际英迪格酒店（老城）</div>
+      <div class="hotel-name-en">Hotel Indigo Batumi - Old Town · ⭐4 · 评分 9.6</div>
+      <div class="hotel-meta">
+        <span class="meta-item">📍 25 Memed Abashidze St, Batumi 6000</span>
+        <span class="meta-item">🕐 入住 15:00 / 退房 12:00</span>
+      </div>
+      <div class="hotel-actions">
+        <a class="nav-btn" href="maps://?daddr=41.6513,41.6372&q=Hotel+Indigo+Batumi">📍 导航</a>
+        <a class="phone-btn" href="tel:+995422225511">📞</a>
+      </div>
+      <a class="booking-link" href="https://www.ihg.com/hotelindigo/hotels/us/en/batumi/busot/hoteldetail" target="_blank">📋 IHG ›</a>
+    </div>
+  </div>
+</div>
+
+<!-- Day 4: 10.5 -->
+<div class="day-card kutaisi">
+  <div class="day-header">
+    <div class="date-badge kutaisi">10.5</div>
+    <div class="route">巴统 — 库塔伊西</div>
+  </div>
+  <div class="day-body">
+    <div class="city-intro" data-city="city_kutaisi"></div>
+    <div class="attractions">
+      <span class="label">景点</span>
+      <span class="attraction-item" data-key="ali_nino">💑 Ali & Nino 移动雕塑</span>
+      <span class="attraction-item" data-key="batumi_boat">⛵ 黑海游船</span>
+    </div>
+    <div class="hotel-box kutaisi">
+      <div class="hotel-name-cn">全景酒店</div>
+      <div class="hotel-name-en">Hotel Panoramic · ⭐4 · 评分 8.9</div>
+      <div class="hotel-meta">
+        <span class="meta-item">📍 87 Tamar Mefe St, Kutaisi 4600</span>
+        <span class="meta-item">🕐 入住 14:00 / 退房 12:00</span>
+      </div>
+      <div class="hotel-actions">
+        <a class="nav-btn" href="maps://?daddr=42.2614,42.7121&q=Hotel+Panoramic+Kutaisi">📍 导航</a>
+        <a class="phone-btn" href="tel:+995591801180">📞</a>
+      </div>
+      <a class="booking-link" href="https://panoramic.ge/" target="_blank">📋 官网 ›</a>
+    </div>
+  </div>
+</div>
+
+<!-- Day 5: 10.6 -->
+<div class="day-card kazbegi">
+  <div class="day-header">
+    <div class="date-badge kazbegi">10.6</div>
+    <div class="route">库塔伊西 — 哥里 — 卡兹别克山</div>
+  </div>
+  <div class="day-body">
+    <div class="city-intro" data-city="city_kazbegi"></div>
+    <div class="attractions">
+      <span class="label">景点</span>
+      <span class="attraction-item" data-key="stalin_museum">🏛 斯大林博物馆</span>
+      <span class="attraction-item" data-key="stalin_house">🏠 斯大林故居</span>
+      <span class="attraction-item" data-key="stalin_train">🚂 斯大林专列</span>
+      <span class="attraction-item" data-key="bagrati_cathedral">⛪ 巴格拉特大教堂（库塔伊西）</span>
+    </div>
+    <div class="hotel-box kazbegi">
+      <div class="hotel-name-cn">卡兹别吉波尔塔考卡斯亚酒店</div>
+      <div class="hotel-name-en">Porta Caucasia Kazbegi · ⭐4 · 评分 8.1</div>
+      <div class="hotel-meta">
+        <span class="meta-item">📍 2 Tergdaleulebi St, Stepantsminda 4700</span>
+        <span class="meta-item">🕐 入住 14:00 / 退房 12:00</span>
+      </div>
+      <div class="hotel-actions">
+        <a class="nav-btn" href="maps://?daddr=42.6598,44.6414&q=Porta+Caucasia+Kazbegi">📍 导航</a>
+        <a class="phone-btn" href="tel:+995322257770">📞</a>
+      </div>
+      <a class="booking-link" href="https://hk.trip.com/hotels/stepantsminda-hotel-detail-14451526/porta-caucasia-kazbegi/" target="_blank">📋 Trip.com ›</a>
+    </div>
+  </div>
+</div>
+
+<!-- Day 6: 10.7 -->
+<div class="day-card kazbegi">
+  <div class="day-header">
+    <div class="date-badge kazbegi">10.7</div>
+    <div class="route">卡兹别克山 · Juta 徒步（安排向导）</div>
+  </div>
+  <div class="day-body">
+    <div class="attractions">
+      <span class="label">活动</span>
+      <span class="attraction-item" data-key="juta_hike">🥾 Juta 徒步（含向导）</span>
+    </div>
+    <div class="hotel-box kazbegi">
+      <div class="hotel-name-cn">梅洛迪亚卡兹别克酒店</div>
+      <div class="hotel-name-en">Melodia Kazbegi · ⭐4.5 · 评分 9.3</div>
+      <div class="hotel-meta">
+        <span class="meta-item">📍 39 Galaktion Tabidze St, Stepantsminda 4700</span>
+        <span class="meta-item">🕐 入住 14:00 / 退房 12:00</span>
+      </div>
+      <div class="hotel-actions">
+        <a class="nav-btn" href="maps://?daddr=42.6580,44.6408&q=Melodia+Kazbegi">📍 导航</a>
+        <a class="phone-btn" href="tel:+995555407343">📞</a>
+      </div>
+      <a class="booking-link" href="https://hotels.ctrip.com/hotels/122838120.html" target="_blank">📋 携程 ›</a>
+    </div>
+  </div>
+</div>
+
+<!-- Day 7: 10.8 -->
+<div class="day-card">
+  <div class="day-header">
+    <div class="date-badge">10.8</div>
+    <div class="route">卡兹别克山 — 圣剑山 — 第比利斯</div>
+  </div>
+  <div class="day-body">
+    <div class="attractions">
+      <span class="label">景点</span>
+      <span class="attraction-item" data-key="military_highway">🛣 军事大道</span>
+      <span class="attraction-item" data-key="ananuri_fortress">🏰 安南努利城堡</span>
+      <span class="attraction-item" data-key="kazbek_peak">⛰ 卡兹别克 / 卡兹别克峰</span>
+      <span class="attraction-item" data-key="gergeti_church">⛪ Gergeti Trinity 修道院（圣三一教堂）</span>
+      <span class="attraction-item" data-key="friendship_monument">🪨 苏格友谊纪念墙 Gudauri View Point</span>
+      <span class="attraction-item" data-key="didgori_memorial">🗡 圣剑山（迪德戈里战役纪念碑）</span>
+    </div>
+    <div class="hotel-box tbilisi">
+      <div class="hotel-name-cn">棕榈第比利斯精品酒店</div>
+      <div class="hotel-name-en">Palm Tbilisi Boutique Hotel</div>
+      <div class="hotel-actions">
+        <a class="nav-btn" href="maps://?daddr=41.6996,44.7954&q=Palm+Tbilisi+Boutique+Hotel">📍 导航</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Day 8: 10.9 -->
+<div class="day-card depart">
+  <div class="day-header">
+    <div class="date-badge depart">10.9</div>
+    <div class="route">第比利斯市区游览 → 送机</div>
+  </div>
+  <div class="day-body">
+    <div class="attractions">
+      <span class="label">景点</span>
+      <span class="attraction-item" data-key="sameba_cathedral">⛪ 圣三一大教堂</span>
+      <span class="attraction-item" data-key="puppet_theatre_clock">🎭 木偶剧院钟楼</span>
+      <span class="attraction-item" data-key="narikala_fortress">🏰 Nariqala 要塞</span>
+      <span class="attraction-item" data-key="kartlis_deda">🗽 格鲁吉亚之母雕塑</span>
+      <span class="attraction-item" data-key="kura_river_boat">⛵ 库拉河游船</span>
+      <span class="attraction-item" data-key="chronicle_of_georgia">🏛 格鲁吉亚编年史纪念碑</span>
+    </div>
+    <div class="no-hotel">✈️ 游览结束后送机，结束行程</div>
+  </div>
+</div>
+
+<div class="footer-note">
+  🇬🇪 Georgia Trip · 点击「导航」跳转 Apple Maps<br>
+  坐标来源：OpenStreetMap / Booking / Trip.com · 路线数据：OSRM 实际道路导航
+</div>
+
+</div>
+
+<div id="map-tab">
+  <button class="map-back" onclick="showTab('itinerary')">‹ 返回行程</button>
+  <div id="map"></div>
+  <div class="map-legend">
+    <div class="day-chips" id="dayChips"></div>
+    <div class="marker-legend">
+      <div class="item"><span class="dot" style="background:#C2643E"></span>第比利斯</div>
+      <div class="item"><span class="dot" style="background:#7A9471"></span>巴统</div>
+      <div class="item"><span class="dot" style="background:#C99A4E"></span>库塔伊西</div>
+      <div class="item"><span class="dot" style="background:#9A7CA8"></span>卡兹别克</div>
+      <div class="item"><span class="dot" style="background:#968F80"></span>途经景点</div>
+      <div class="item">🏨 酒店</div>
+    </div>
+  </div>
+</div>
+
+<script src="leaflet.js"></script>
+<script src="app.js"></script>
+<script>
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.register("sw.js");
+}
+</script>
+
+</body>
+</html>
