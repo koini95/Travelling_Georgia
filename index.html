@@ -26,6 +26,7 @@
   <div class="tab active" data-tab="itinerary" onclick="showTab('itinerary')">📋 行程</div>
   <div class="tab" data-tab="map" onclick="showTab('map')">🗺️ 地图</div>
   <div class="tab" data-tab="toolkit" onclick="showTab('toolkit')">🧳 锦囊</div>
+  <div class="tab" data-tab="weather" onclick="showTab('weather')">🌤️ 天气</div>
 </div>
 <div class="container" id="overview-tab" style="display:none">
 
@@ -576,6 +577,38 @@
   </div></div>
 </div>
 
+</div>
+
+<div class="container" id="weather-tab" style="display:none">
+  <div class="note-box" id="weatherStatusNote">
+    正在获取天气数据…（准确预报只能在出发前16天内查到；离出发还早时，下面会先显示10月历史同期参考气候）
+  </div>
+  <div id="weatherCards">
+    <div class="weather-card" data-city="tbilisi">
+      <div class="weather-card-head"><span class="name">🏙 第比利斯</span><span class="dates">10.2-10.3 · 10.8-10.9</span></div>
+      <div class="weather-body"></div>
+    </div>
+    <div class="weather-card" data-city="kakheti">
+      <div class="weather-card-head"><span class="name">🍇 西格纳吉 · 卡赫季</span><span class="dates">10.3</span></div>
+      <div class="weather-body"></div>
+    </div>
+    <div class="weather-card batumi" data-city="batumi">
+      <div class="weather-card-head"><span class="name">🌊 巴统</span><span class="dates">10.4-10.5</span></div>
+      <div class="weather-body"></div>
+    </div>
+    <div class="weather-card kutaisi" data-city="kutaisi">
+      <div class="weather-card-head"><span class="name">🏛 库塔伊西</span><span class="dates">10.5-10.6</span></div>
+      <div class="weather-body"></div>
+    </div>
+    <div class="weather-card kazbegi" data-city="kazbegi">
+      <div class="weather-card-head"><span class="name">⛰ 卡兹别克</span><span class="dates">10.6-10.8</span></div>
+      <div class="weather-body"></div>
+    </div>
+  </div>
+  <button class="weather-refresh" onclick="loadWeather(true)">↻ 重新获取实时预报</button>
+  <div class="footer-note">
+    数据来源：Open-Meteo（免费开放气象接口）· 出发前16天内打开本页会自动换成当天实时预报，无网络时显示历史参考气候
+  </div>
 </div>
 
 <div id="map-tab">

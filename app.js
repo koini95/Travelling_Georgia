@@ -211,7 +211,7 @@ function showTab(tab) {
   tabs.forEach(function(t) {
     t.classList.toggle('active', t.dataset.tab === tab);
   });
-  ['overview', 'itinerary', 'toolkit'].forEach(function(name) {
+  ['overview', 'itinerary', 'toolkit', 'weather'].forEach(function(name) {
     var el = document.getElementById(name + '-tab');
     if (el) el.style.display = (tab === name) ? 'block' : 'none';
   });
@@ -224,6 +224,141 @@ function showTab(tab) {
     }
     if (window._map) { setTimeout(function(){ window._map.invalidateSize(); }, 150); }
   }
+  if (tab === 'weather' && !window._weatherInited) {
+    window._weatherInited = true;
+    loadWeather(false);
+  }
+}
+
+// ===== Weather: live forecast (Open-Meteo, no key) with climate-normal fallback =====
+
+var TRIP_YEAR = 2026;
+var WEATHER_CITIES = [
+  {
+    key: 'tbilisi', lat: 41.6938, lng: 44.8014,
+    dates: ['10-02', '10-03', '10-08', '10-09'],
+    climate: { hi: 20, lo: 9, rain: '10月平均约6天有降水，多为短时阵雨', note: '早晚偏凉，白天舒适，薄外套+长袖足够。' }
+  },
+  {
+    key: 'kakheti', lat: 41.6193, lng: 45.9258,
+    dates: ['10-03'],
+    climate: { hi: 19, lo: 7, rain: '和第比利斯类似，大陆性气候，昼夜温差较大', note: '酒庄多在户外，早晚山谷风偏凉，带件薄外套。' }
+  },
+  {
+    key: 'batumi', lat: 41.6163, lng: 41.6367,
+    dates: ['10-04', '10-05'],
+    climate: { hi: 21, lo: 14, rain: '10月是黑海沿岸全年最多雨的月份之一，平均降水150mm+', note: '大概率会遇到阵雨，务必带雨具/防水外套。' }
+  },
+  {
+    key: 'kutaisi', lat: 42.2679, lng: 42.7179,
+    dates: ['10-05', '10-06'],
+    climate: { hi: 20, lo: 11, rain: '同属西部湿润气候，比巴统略干，仍常有阵雨', note: '体感温润，带一件轻便雨衣即可。' }
+  },
+  {
+    key: 'kazbegi', lat: 42.6567, lng: 44.6425,
+    dates: ['10-06', '10-07', '10-08'],
+    climate: { hi: 9, lo: 0, rain: '山区天气多变，10月已可能遇雨夹雪', note: '海拔约1740米，昼夜温差大，务必带厚外套/冲锋衣，徒步鞋防滑防水。' }
+  }
+];
+
+var WMO_ICON = {
+  0: '☀️', 1: '🌤️', 2: '⛅', 3: '☁️',
+  45: '🌫️', 48: '🌫️',
+  51: '🌦️', 53: '🌦️', 55: '🌦️', 56: '🌦️', 57: '🌦️',
+  61: '🌧️', 63: '🌧️', 65: '🌧️', 66: '🌧️', 67: '🌧️',
+  71: '🌨️', 73: '🌨️', 75: '🌨️', 77: '🌨️',
+  80: '🌦️', 81: '🌧️', 82: '⛈️',
+  85: '🌨️', 86: '🌨️',
+  95: '⛈️', 96: '⛈️', 99: '⛈️'
+};
+
+function loadWeather(forceRefresh) {
+  var note = document.getElementById('weatherStatusNote');
+  if (forceRefresh) note.textContent = '正在重新获取实时预报…';
+
+  var today = new Date();
+  var departure = new Date(TRIP_YEAR, 9, 2); // Oct 2
+  var daysUntil = Math.ceil((departure - today) / 86400000);
+
+  var fetches = WEATHER_CITIES.map(function(c) {
+    var url = 'https://api.open-meteo.com/v1/forecast?latitude=' + c.lat + '&longitude=' + c.lng +
+      '&daily=weathercode,temperature_2m_max,temperature_2m_min,precipitation_probability_mean' +
+      '&timezone=auto&forecast_days=16';
+    return fetch(url).then(function(r) {
+      if (!r.ok) throw new Error('bad response');
+      return r.json();
+    }).then(function(data) {
+      return { city: c, data: data };
+    }).catch(function() {
+      return { city: c, data: null };
+    });
+  });
+
+  Promise.all(fetches).then(function(results) {
+    var anyLive = false;
+    results.forEach(function(res) {
+      var card = document.querySelector('.weather-card[data-city="' + res.city.key + '"] .weather-body');
+      if (!card) return;
+      var liveDays = matchLiveDays(res.city, res.data);
+      if (liveDays.length) {
+        anyLive = true;
+        renderLiveDays(card, liveDays);
+      } else {
+        renderClimateFallback(card, res.city);
+      }
+    });
+    if (anyLive) {
+      note.textContent = '已显示可查到的实时预报（绿色标记）；其余日期离出发还太远，暂时用历史同期气候参考代替。';
+    } else if (daysUntil > 16) {
+      note.textContent = '现在离出发还有约 ' + daysUntil + ' 天，超出16天预报范围，以下均为10月历史同期参考气候，出发前16天内再打开会自动换成实时预报。';
+    } else {
+      note.textContent = '暂时获取不到实时预报（可能无网络），以下先显示历史同期参考气候，联网后可点下方按钮重试。';
+    }
+  });
+}
+
+function matchLiveDays(city, data) {
+  if (!data || !data.daily || !data.daily.time) return [];
+  var out = [];
+  data.daily.time.forEach(function(iso, i) {
+    var md = iso.slice(5); // MM-DD
+    if (city.dates.indexOf(md) === -1) return;
+    out.push({
+      date: iso,
+      code: data.daily.weathercode[i],
+      hi: Math.round(data.daily.temperature_2m_max[i]),
+      lo: Math.round(data.daily.temperature_2m_min[i]),
+      pop: data.daily.precipitation_probability_mean ? data.daily.precipitation_probability_mean[i] : null
+    });
+  });
+  return out;
+}
+
+function renderLiveDays(card, days) {
+  var html = '<span class="weather-badge live">实时预报</span><div class="weather-days">';
+  days.forEach(function(d) {
+    var md = d.date.slice(5).replace('-', '.');
+    html += '<div class="weather-day">' +
+      '<div class="d">' + md + '</div>' +
+      '<div class="ic">' + (WMO_ICON[d.code] || '🌡️') + '</div>' +
+      '<div class="hi">' + d.hi + '°</div>' +
+      '<div class="lo">' + d.lo + '°</div>' +
+      (d.pop !== null ? '<div class="pp">💧' + d.pop + '%</div>' : '') +
+      '</div>';
+  });
+  html += '</div>';
+  card.innerHTML = html;
+}
+
+function renderClimateFallback(card, city) {
+  var c = city.climate;
+  card.innerHTML =
+    '<span class="weather-badge climate">历史参考</span>' +
+    '<div class="weather-climate-row" style="margin-top:8px;">' +
+      '<span class="ic">🌡️</span>' +
+      '<span class="figs">' + c.hi + '° / ' + c.lo + '°<span>10月平均高/低温</span></span>' +
+    '</div>' +
+    '<div class="weather-note">' + c.rain + '。' + c.note + '</div>';
 }
 
 // Real driving-route geometries fetched from OSRM (actual roads), simplified with
