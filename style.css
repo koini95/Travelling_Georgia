@@ -596,3 +596,66 @@ body {
 }
 .safety-sub { font-size: 12px; font-weight: 700; color: var(--red); margin: 14px 0 6px; }
 .safety-sub:first-child { margin-top: 0; }
+
+/* ===== Weather tab ===== */
+.weather-card {
+  background: var(--card);
+  border-radius: var(--radius);
+  margin-bottom: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(60,50,30,0.07);
+  border-left: 3px solid var(--blue);
+  padding: 14px 16px;
+}
+.weather-card.batumi { border-left-color: var(--green); }
+.weather-card.kutaisi { border-left-color: var(--orange); }
+.weather-card.kazbegi { border-left-color: var(--purple); }
+.weather-card-head { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; margin-bottom: 10px; }
+.weather-card-head .name { font-size: 15px; font-weight: 700; color: var(--text); }
+.weather-card-head .dates { font-size: 11.5px; color: var(--text3); }
+.weather-days { display: flex; overflow-x: auto; gap: 8px; padding-bottom: 2px; }
+.weather-day {
+  flex: 0 0 auto;
+  min-width: 62px;
+  background: var(--bg);
+  border-radius: 10px;
+  padding: 8px 6px;
+  text-align: center;
+}
+.weather-day .d { font-size: 11px; color: var(--text3); font-weight: 600; margin-bottom: 4px; }
+.weather-day .ic { font-size: 20px; margin-bottom: 4px; }
+.weather-day .hi { font-size: 13px; font-weight: 700; color: var(--text); }
+.weather-day .lo { font-size: 11.5px; color: var(--text3); }
+.weather-day .pp { font-size: 10px; color: var(--indigo); margin-top: 3px; }
+.weather-climate-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: var(--bg);
+  border-radius: 10px;
+  padding: 10px 12px;
+}
+.weather-climate-row .ic { font-size: 22px; }
+.weather-climate-row .figs { font-size: 13px; color: var(--text); font-weight: 600; }
+.weather-climate-row .figs span { color: var(--text3); font-weight: 400; margin-left: 6px; }
+.weather-card .weather-note { font-size: 12px; color: var(--text2); line-height: 1.6; margin-top: 8px; }
+.weather-badge {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 700;
+  border-radius: 6px;
+  padding: 2px 7px;
+  margin-left: 6px;
+  vertical-align: middle;
+}
+.weather-badge.live { background: #E4F0E8; color: var(--green); }
+.weather-badge.climate { background: #F0E8DC; color: var(--orange); }
+.weather-refresh {
+  display: inline-block;
+  font-size: 12px;
+  color: var(--teal);
+  background: none;
+  border: none;
+  padding: 0;
+  margin-top: 2px;
+}
